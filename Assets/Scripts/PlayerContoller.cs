@@ -18,8 +18,15 @@ public class PlayerContoller : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+
+        if(horizontalInput > 0.01f)
+            transform.localScale = Vector3.one;
+        else if(horizontalInput < -0.01f)
+            transform.localScale = new Vector3(-1,1,1);
 
         if (Input.GetKey(KeyCode.Space))
         {
