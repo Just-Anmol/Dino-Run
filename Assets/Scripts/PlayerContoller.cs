@@ -10,6 +10,7 @@ public class PlayerContoller : MonoBehaviour
     public float jumpSpeed = 10.0f;
     private Animator anim;
     private bool OnLand;
+    private float horizontalInput;
 
 
 
@@ -23,7 +24,7 @@ public class PlayerContoller : MonoBehaviour
     void Update()
 
     {
-        float horizontalInput = Input.GetAxis("Horizontal"); // Making a refrence so use multiple times
+        horizontalInput = Input.GetAxis("Horizontal"); // Making a refrence so use multiple times
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y) ; // left right movement
 
 
@@ -55,6 +56,11 @@ public class PlayerContoller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Land") ;
         OnLand = true;
+    }
+
+    public bool canAttack()
+    {
+        return horizontalInput == 0 && OnLand;
     }
 
 }
