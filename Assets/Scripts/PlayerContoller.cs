@@ -24,15 +24,15 @@ public class PlayerContoller : MonoBehaviour
     void Update()
 
     {
-        horizontalInput = Input.GetAxis("Horizontal"); // Making a refrence so use multiple times
+       /* horizontalInput = Input.GetAxis("Horizontal"); // Making a refrence so use multiple times
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y) ; // left right movement
 
 
-        //Flip character movement
+        Flip character movement
         if(horizontalInput > 0.01f)
             transform.localScale = Vector3.one;
         else if(horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1,1,1) ;
+            transform.localScale = new Vector3(-1,1,1) ;*/
 
         // Jump movement
         if (Input.GetKey(KeyCode.Space) && OnLand)
@@ -54,7 +54,7 @@ public class PlayerContoller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Land") ;
+        if (collision.gameObject.tag == "Land")
         OnLand = true;
     }
 
