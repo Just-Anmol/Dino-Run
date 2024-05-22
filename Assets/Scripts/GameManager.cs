@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class GameManager : MonoBehaviour
 
     private PlayerContoller player;
     private Spawner spawner;
+
+    public TextMeshProUGUI gameOver;
+    public Button retryButton;
 
 
 
@@ -29,6 +34,8 @@ public class GameManager : MonoBehaviour
         }
         else 
             DestroyImmediate(gameObject);
+
+
     }
 
     private void OnDestroy()
@@ -45,7 +52,7 @@ public class GameManager : MonoBehaviour
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
     }
 
-    void NewGame()
+    public void NewGame()
     {
         Obstacles[] obstacle = FindObjectsOfType<Obstacles>();
         
@@ -59,6 +66,9 @@ public class GameManager : MonoBehaviour
 
         player.gameObject.SetActive(true);
         spawner.gameObject.SetActive(true);
+
+        gameOver.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);
     }
 
     public void GameOver()
@@ -67,6 +77,9 @@ public class GameManager : MonoBehaviour
         enabled = false;
 
         player.gameObject.SetActive(false);
-        spawner.gameObject.SetActive(false);    
+        spawner.gameObject.SetActive(false);
+
+        gameOver.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true);
     }
 }
