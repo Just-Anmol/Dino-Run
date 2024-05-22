@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOver;
     public Button retryButton;
 
+    public Text ScoreText;
+    public Text HighScoreText;
+    
+    public float score;
+
+
 
 
     // Start is called before the first frame update
@@ -50,6 +56,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
+        score += gameSpeed * Time.deltaTime;
+        ScoreText.text = score.ToString();
     }
 
     public void NewGame()
@@ -61,6 +69,7 @@ public class GameManager : MonoBehaviour
             Destroy(Obstacles.gameObject);
         }
 
+        score = 0;
         gameSpeed = initialGameSpeed;
         enabled = true;
 
@@ -69,6 +78,8 @@ public class GameManager : MonoBehaviour
 
         gameOver.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
+
+        highScore();
     }
 
     public void GameOver()
@@ -81,5 +92,20 @@ public class GameManager : MonoBehaviour
 
         gameOver.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
+
+        highScore();
+    }
+
+    public void highScore()
+    {
+        float HighScore = PlayerPrefs.GetFloat("HighScore", 0);
+
+        if(score > HighScore)
+        {
+            HighScore = score;
+            PlayerPrefs.SetFloat("HighScore", HighScore);
+        }
+
+            HighScoreText.text = HighScore.ToString();
     }
 }
