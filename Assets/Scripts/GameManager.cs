@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
         score += gameSpeed * Time.deltaTime;
-        ScoreText.text = score.ToString();
+        ScoreText.text = score.ToString() ;
     }
 
     public void NewGame()
